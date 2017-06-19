@@ -12,7 +12,7 @@ from django.http import HttpResponse
 from accounts.models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.db.models.signals import post_save
-
+from django.urls import reverse
 # Create your views here.
 
 #@login_required
@@ -24,7 +24,7 @@ def register(request):
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.save()
-		return redirect("% url 'accounts:home' %")
+		return redirect(reverse('accounts:home'))
 	args={'form':form}
 	return render(request,'accounts/reg_form.html',args)
 
@@ -40,7 +40,7 @@ def edit_profile(request):
 
 		if form.is_valid():
 			form.save()
-			return redirect("% url 'accounts:view_profile' %")
+			return redirect(reverse('accounts:view_profile' ))
 
 	else:
 		form = EditProfileForm(instance=request.user)
@@ -55,9 +55,9 @@ def change_password(request):
 		if form.is_valid():
 			form.save()
 			update_session_auth_hash(request, form.user)
-			return redirect("% url 'accounts:view_profile' %")
+			return redirect(reverse('accounts:view_profile' ))
 		else:
-			return redirect("% url 'accounts:change_password' %")
+			return redirect(reverse('accounts:change_password' ))
 	else:
 		form = PasswordChangeForm(user=request.user)
 		args = {'form': form}
