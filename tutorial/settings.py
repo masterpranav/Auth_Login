@@ -124,7 +124,7 @@ STATICFILES_DIRS = [
     'accounts/static/accounts',
 ]
 STATIC_ROOT=os.path.join(BASE_DIR, "static")
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/account/home/'
 LOGIN_URL='/account/login/'
 LOGIN_EXEMPT_URLS = (
